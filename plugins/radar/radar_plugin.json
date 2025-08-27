@@ -1,0 +1,6 @@
+{
+    "name": "RadarPlugin",
+    "version": "1.0",
+    "compatible_qgc_version": ">=5.0.0",
+    "description": "Radar visualization plugin for QGroundControl"
+}

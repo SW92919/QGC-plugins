@@ -1,0 +1,13 @@
+{
+    "name":"DashboardPlugin",
+    "version":"1.0",
+    "compatible_qgc_version":">=5.0.0",
+    "description":"Advanced dashboard plugin for aircraft control and telemetry display",
+    "features":[
+        "Real-time telemetry monitoring",
+        "Flight mode control",
+        "ARM/DISARM commands",
+        "Battery monitoring",
+        "Altitude and airspeed display"
+    ]
+}
