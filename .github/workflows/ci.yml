@@ -27,28 +27,33 @@ jobs:
 
     - name: Setup MSVC
       uses: microsoft/setup-msbuild@v1
+######it is working using CI on git.
+    # - name: Configure CMake
+    #   run: |
+    #     mkdir build
+    #     cd build
+    #     cmake .. -G "Visual Studio 17 2022" -A x64 -DCMAKE_BUILD_TYPE=Release
 
-    - name: Configure CMake
-      run: |
-        mkdir build
-        cd build
-        cmake .. -G "Visual Studio 17 2022" -A x64 -DCMAKE_BUILD_TYPE=Release
+    # - name: Build
+    #   run: |
+    #     cd build
+    #     cmake --build . --config Release --parallel
 
-    - name: Build
-      run: |
-        cd build
-        cmake --build . --config Release --parallel
+    # - name: Run Tests
+    #   run: |
+    #     cd build
+    #     ctest -C Release --output-on-failure --verbose
 
-    - name: Run Tests
-      run: |
-        cd build
-        ctest -C Release --output-on-failure --verbose
-
-    # - name: Build QGC Plugins
-    #   run: ./build.bat
+######
+    - name: Build QGC Plugins
+      run: ./build.bat
 
     # - name: Run Tests
     #   run: ./ci/test.bat
+
+    - name: Run Tests
+      working-directory: ci
+      run: test.bat
 
     - name: Package Artifacts
       run: |
