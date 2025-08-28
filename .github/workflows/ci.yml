@@ -41,11 +41,11 @@ jobs:
 
     - name: Build QGC Plugins
       run: |
-        ./build.bat
+        build.bat
 
     - name: Run Tests   
       run: |
-        ./ci/test.bat
+        ci/test.bat
 
     - name: Package Artifacts
       run: |
