@@ -25,7 +25,7 @@ void TestPluginFramework::cleanupTestCase()
 void TestPluginFramework::testPluginDiscovery()
 {
     // Test plugin discovery in plugins directory
-    manager_->discoverPlugins("../plugins");
+    manager_->discoverPlugins("../bin/Release");
 
     // Should find at least radar and dashboard plugins
     QVERIFY(manager_->loadedPlugins().size()>=1);
@@ -51,7 +51,7 @@ void TestPluginFramework::testPluginLoading()
 {
     QSignalSpy loadSpy(manager_, &DevicePluginManager::pluginLoaded);
 
-    manager_->discoverPlugins("../plugins");
+    manager_->discoverPlugins("../bin/Release");
 
     // Should have received at least one pluginLoaded signal
     QVERIFY(loadSpy.count()>=1);
@@ -67,7 +67,7 @@ void TestPluginFramework::testPluginLoading()
 
 void TestPluginFramework::testPluginCommunication()
 {
-    manager_->discoverPlugins("../plugins");
+    manager_->discoverPlugins("../bin/Release");
 
     if(manager_->loadedPlugins().isEmpty()){
         QSKIP("No plugins loaded, skipping communication test");
@@ -85,7 +85,7 @@ void TestPluginFramework::testPluginCommunication()
         // Test QMetaObject::invokeMethod for thread safety
         QMetaObject::invokeMethod(
             plugin,
-            "receiveMessage",
+            "receivedMessage",
             Qt::QueuedConnection,
             Q_ARG(QString, "QUEUED_TEST:Message"
         ));
@@ -102,7 +102,7 @@ void TestPluginFramework::testPluginCommunication()
 
 void TestPluginFramework::testPluginLifecycle()
 {
-    manager_->discoverPlugins("../plugins");
+    manager_->discoverPlugins("../bin/Release");
 
     // Test that all loaded plugins have valid names
     for(auto *plugin:manager_->loadedPlugins())
@@ -119,7 +119,7 @@ void TestPluginFramework::testPluginLifecycle()
 
 void TestPluginFramework::testPluginUnloading()
 {
-    manager_->discoverPlugins("../plugins");
+    manager_->discoverPlugins("../bin/Release");
     int initialCount=manager_->loadedPlugins().size();
 
     if (initialCount==0)
@@ -144,7 +144,7 @@ void TestPluginFramework::testPluginUnloading()
 
 void TestPluginFramework::testPluginMetadata()
 {
-    manager_->discoverPlugins("../plugins");
+    manager_->discoverPlugins("../bin/Release");
 
     // Test that we can access plugin information
     for (auto *plugin:manager_->loadedPlugins())
@@ -158,7 +158,7 @@ void TestPluginFramework::testPluginMetadata()
         QVERIFY(metaObj!=nullptr);
 
         // Should have the receiveMessage slot
-        int methodIndex=metaObj->indexOfSlot("receiveMessage(QString");
+        int methodIndex=metaObj->indexOfSlot("receivedMessage(QString)");
         QVERIFY(methodIndex>=0);
 
         qDebug()<<"Plugin"<<name<<"has valid metadata";
