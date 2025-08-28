@@ -39,9 +39,9 @@ jobs:
         cd build
         cmake --build . --config Release --parallel
 
-    - name: Run Tests
-      working-directory: ci
-      run: test.bat
+    - name: Run Tests   
+      run: ./ci/test.bat
+      shell:cmd
 
     - name: Package Artifacts
       run: |
