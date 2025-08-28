@@ -27,7 +27,8 @@ jobs:
 
     - name: Setup MSVC
       uses: microsoft/setup-msbuild@v1
-######it is working using CI on git.
+
+###### It is working using CI on git.
     # - name: Configure CMake
     #   run: |
     #     mkdir build
@@ -53,7 +54,7 @@ jobs:
 
     - name: Run Tests
       working-directory: ci
-      run: test.bat
+      run: ./test.bat
 
     - name: Package Artifacts
       run: |
