@@ -44,9 +44,7 @@ jobs:
     #     build.bat
 
     - name: Run Tests   
-      run: |
-        cd ci
-        test.bat
+      run: ./ci/test.bat
 
     - name: Package Artifacts
       run: |
