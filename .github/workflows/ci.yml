@@ -41,7 +41,6 @@ jobs:
 
     - name: Run Tests   
       run: ./ci/test.bat
-      shell:cmd
 
     - name: Package Artifacts
       run: |
