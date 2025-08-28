@@ -1,16 +1,16 @@
 @echo off
 echo Running QGC Plugin Framework Tests...
 
-if not exist build (
+if not exist "..\build" (
     echo Error: No build directory found. Run build.bat first.
     pause
     exit /b 1
 )
 
-pushd build
+pushd ..\build
 
 echo Running CTest...
-ctest --output-on-failure --verbose
+ctest -C Release --output-on-failure --verbose
 set TEST_RESULT=%ERRORLEVEL%
 
 
