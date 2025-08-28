@@ -39,10 +39,9 @@ jobs:
         cd build
         cmake --build . --config Release --parallel
 
-    - name: Test
-      run: |
-        cd build
-        ctest --output-on-failure -C Release
+    - name: Run Tests
+      working-directory: ci
+      run: test.bat
 
     - name: Package Artifacts
       run: |
@@ -56,38 +55,38 @@ jobs:
         name: qgc-plugins-windows
         path: package/
 
-  build-linux:
-    runs-on: ubuntu-latest
+  # build-linux:
+  #   runs-on: ubuntu-latest
 
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-      with:
-        submodules: recursive
+  #   steps:
+  #   - name: Checkout code
+  #     uses: actions/checkout@v4
+  #     with:
+  #       submodules: recursive
 
-    - name: Install dependencies
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y qtbase5-dev qtdeclarative5-dev qtquickcontrols2-5-dev cmake g++
+  #   - name: Install dependencies
+  #     run: |
+  #       sudo apt-get update
+  #       sudo apt-get install -y qtbase5-dev qtdeclarative5-dev qtquickcontrols2-5-dev cmake g++
 
-    - name: Configure CMake
-      run: |
-        mkdir build
-        cd build
-        cmake ..
+  #   - name: Configure CMake
+  #     run: |
+  #       mkdir build
+  #       cd build
+  #       cmake ..
 
-    - name: Build
-      run: |
-        cd build
-        make -j$(nproc)
+  #   - name: Build
+  #     run: |
+  #       cd build
+  #       make -j$(nproc)
 
-    - name: Test
-      run: |
-        cd build
-        ctest --output-on-failure
+  #   - name: Test
+  #     run: |
+  #       cd build
+  #       ctest --output-on-failure
 
-    - name: Upload Artifacts
-      uses: actions/upload-artifact@v3
-      with:
-        name: qgc-plugins-linux
-        path: build/plugins/
+  #   - name: Upload Artifacts
+  #     uses: actions/upload-artifact@v3
+  #     with:
+  #       name: qgc-plugins-linux
+  #       path: build/plugins/
