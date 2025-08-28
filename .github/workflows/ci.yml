@@ -40,10 +40,12 @@ jobs:
         cmake --build . --config Release --parallel
 
     - name: Build QGC Plugins
-      run: ./build.bat
+      run: |
+        ./build.bat
 
     - name: Run Tests   
-      run: ./ci/test.bat
+      run: |
+        ./ci/test.bat
 
     - name: Package Artifacts
       run: |
