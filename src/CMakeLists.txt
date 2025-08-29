@@ -20,6 +20,8 @@ set(FRAMEWORK_SOURCES
     device_plugin_manager.h
     mavlink_handler.cpp
     mavlink_handler.h
+    mavlink_message_parser.h
+    mavlink_message_parser.cpp
     version_compatibility.cpp
     version_compatibility.h
 )

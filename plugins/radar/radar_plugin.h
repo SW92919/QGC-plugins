@@ -1,5 +1,10 @@
 #pragma once
 #include "../../src/device_plugin_interface.h"
+#include "radar_entity.h"
+#include <QVector>
+#include <QMap>
+#include <QString>
+#include <QVariant>
 
 class RadarPlugin:public DevicePluginInterface
 {
@@ -18,6 +23,10 @@ public:
 public slots:
     void receivedMessage(const QString &msg) override;
 
+private slots:
+    void onExternalPoiDetected(const QMap<QString, QVariant> &poiData);
+
 private:
     bool isActive_;
+    QVector<RadarEntity*> radarEntities_;
 };

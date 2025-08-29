@@ -35,7 +35,8 @@ void TestPluginFramework::testPluginDiscovery()
     bool foundRadar=false;
     bool foundDashboard=false;
 
-    for(auto *plugin:manager_->loadedPlugins()){
+    for(auto *plugin:manager_->loadedPlugins())
+    {
         QString name=plugin->pluginName();
         qDebug()<<"Found plugin:"<<name;
 

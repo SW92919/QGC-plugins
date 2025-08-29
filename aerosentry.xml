@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<mavlink>
+  <version>3</version>
+  <enums>
+    <enum name="MAV_TYPE">
+      <entry value="250" name="MAV_TYPE_AS_PULSE">
+        <description>Pulse</description>
+      </entry>
+    </enum>
+    <enum name="AS_POI_SOURCE_TYPE">
+      <description>POI source</description>
+      <entry value="0" name="AS_POI_SOURCE_TYPE_UNDEFINED">
+        <description>Undefined</description>
+      </entry>
+      <entry value="10" name="AS_POI_SOURCE_TYPE_RADAR">
+        <description>Radar</description>
+      </entry>
+    </enum>
+    <enum name="AS_POI_TYPE">
+      <description>POI type</description>
+      <entry value="0" name="AS_POI_TYPE_UNDEFINED">
+        <description>Undefined</description>
+      </entry>
+      <entry value="1" name="AS_POI_TYPE_RED_TARGET">
+        <description>Red target</description>
+      </entry>
+    </enum>
+    <enum name="AS_POI_CLASS" bitmask="true">
+      <description>POI classification</description>
+      <entry value="2" name="AS_POI_CLASS_UAV">
+        <description>UAV</description>
+      </entry>
+    </enum>
+  </enums>
+  <messages>
+    <message id="20000" name="AS_POI_SOURCE">
+      <description>Point-of-interest source.</description>
+      <field type="uint8_t" name="id">Source identifier</field>
+      <field type="uint8_t" name="type" enum="AS_POI_SOURCE_TYPE">Source type</field>
+      <field type="int32_t" name="lat" units="degE7">Latitude (WGS84)</field>
+      <field type="int32_t" name="lon" units="degE7">Longitude (WGS84)</field>
+      <field type="float" name="alt" units="m">Altitude (MSL), positive for up</field>
+    </message>
+    <message id="20001" name="AS_POI">
+      <description>Point-of-interest report.</description>
+      <field type="uint64_t" name="time_usec" units="us">Timestamp (UNIX Epoch time or time since system boot)</field>
+      <field type="uint8_t" name="source_id">Source identifier</field>
+      <field type="uint32_t" name="id">Object identifier</field>
+      <field type="uint8_t" name="type" enum="AS_POI_TYPE">Type</field>
+      <field type="int16_t" name="cls" enum="AS_POI_CLASS">Classfication</field>
+      <field type="int32_t" name="lat" units="degE7">Latitude (WGS84)</field>
+      <field type="int32_t" name="lon" units="degE7">Longitude (WGS84)</field>
+      <field type="float" name="alt" units="m">Altitude (MSL), positive for up</field>
+      <field type="float" name="vn" units="m/s">Velocity in north direction in earth-fixed NED frame</field>
+      <field type="float" name="ve" units="m/s">Velocity in east direction in earth-fixed NED frame</field>
+      <field type="float" name="vd" units="m/s">Velocity in down direction in earth-fixed NED frame</field>
+      <field type="float" name="strength">Depending on source, radar: RCS (dBsm)</field>
+      <field type="int8_t" name="confidence" units="%">Confidence % * 100</field>
+    </message>
+  </messages>
+</mavlink>

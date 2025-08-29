@@ -41,7 +41,8 @@ void DevicePluginManager::discoverPlugins(const QString &directory){
         QPluginLoader *loader=new QPluginLoader(filePath);
         QObject *instance=loader->instance();
 
-        if (instance) {
+        if (instance)
+        {
             auto *plugin=qobject_cast<DevicePluginInterface*>(instance);
             if (plugin)
             {

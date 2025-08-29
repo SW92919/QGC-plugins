@@ -5,6 +5,12 @@ MAVLinkHandler::MAVLinkHandler(QObject *parent):QObject(parent){
 
 }
 
+bool MAVLinkHandler::initialize(const QString &schemaPath)
+{
+    parser_=new MAVLinkMessageParser(this);
+    return parser_->loadSchema(schemaPath);
+}
+
 void MAVLinkHandler::handleMessage(const QString &message)
 {
     parseMAVLinkMessage(message);
@@ -20,8 +26,22 @@ void MAVLinkHandler::parseMAVLinkMessage(const QString &message)
     }
     else if (message.contains("EXTERNAL"))
     {
-        emit redEntityDetected(message);
-    }
+        if (!parser_)
+        {
+            qWarning()<<"Parser not initialized!";
+            return;
+        }
 
+        QMap<QString, QVariant> parsed=parser_->parseMessage(message);
+
+        if (!parsed.isEmpty())
+        {
+            emit externalPoiDetected(parsed);
+        }
+        else
+        {
+            emit redEntityDetected(message);
+        }
+    }
     qDebug()<<"Parsed MAVLink message:"<<message;
 }
